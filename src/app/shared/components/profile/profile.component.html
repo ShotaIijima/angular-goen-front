@@ -1,0 +1,99 @@
+<div class="card">
+  <div class="profile-wrap animated fadeIn">
+    <div class="info-wrap">
+      <div class="avatar-wrap">
+        <img src="{{user.photo_path}}">
+      </div>
+      <span class="user-name">{{user.name}}</span>
+      <span class="map-location">
+        <i class="fa fa-map-marker"></i>
+        <span>{{user.area}}</span>
+      </span>
+    </div>
+    <div class="profile-head">
+      <img src="{{avatarImgSrc}}" alt="profile-head-bg" class="profile-head-bg">
+    </div>
+    <div class="profile-foot">
+      <h4>プロフィール</h4>
+        <div class="col-md-6 form-group">
+          <label class="control-label">ユーザ名</label>
+          <input type="text" class="form-control" placeholder="ユーザ名" [(ngModel)]="user.name">
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">メールアドレス</label>
+            <input type="text" class="form-control" placeholder="メールアドレス" [(ngModel)]="user.mail_address">
+          </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">性別</label>
+          <select name="select" class="form-control" [(ngModel)]="user.sex">
+            <option value="1">男性</option>
+            <option value="2">女性</option>
+          </select>
+        </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">生年月日</label>
+          <form class="form-inline">
+            <select name="select" class="form-control" (change)="onChangeBirthY($event.target.value)">
+              <option *ngFor='let year of years' value="{{year}}">{{year}}</option>
+            </select>
+            <select name="select" class="form-control" (change)="onChangeBirthM($event.target.value)">
+              <option *ngFor='let month of months' value="{{month}}">{{month}}</option>
+            </select>
+            <select name="select" class="form-control" (change)="onChangeBirthD($event.target.value)">
+              <option *ngFor='let day of days' value="{{day}}">{{day}}</option>
+            </select>
+          </form>
+        </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">Username</label>
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">勤務希望地 詳細</label>
+          <input type="text" class="form-control" placeholder="勤務希望地 詳細" [(ngModel)]="user.wp_detail">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">自己紹介</label>
+          <textarea class="form-control" [(ngModel)]="user.self_introduction"></textarea>
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">アピール</label>
+          <textarea class="form-control" [(ngModel)]="user.apeal"></textarea>
+        </div>
+        <h4>SNS</h4>
+        <div class="col-md-12 form-group">
+          <label class="control-label">Facebook</label>
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">GitHub</label>
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">Slack</label>
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">Skype</label>
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <ul class="contact-way-item">
+          <li class="contact-way-list">
+            <div class="info-icon-no-link fa fa-facebook"></div>
+          </li>
+          <li class="contact-way-list">
+            <a href="#" class="info-icon fa fa-github"></a>
+          </li>
+          <li class="contact-way-list">
+            <a href="#" class="info-icon fa fa-slack"></a>
+          </li>
+          <li class="contact-way-list">
+            <a href="#" class="info-icon fa fa-skype"></a>
+          </li>
+        </ul>
+        <button (click)="updateUser()" class="btn btn-primary update-button">更新</button>
+        <alert *ngIf="updateCompleted" type="success" isCloseAlert="true">プロフィールの更新が完了しました。</alert>
+        <alert *ngIf="updateFailed" type="danger" isCloseAlert="true">申し訳ございません。ただいまメンテナンス中につきご利用いただけません。</alert>
+    </div>
+  </div>
+</div>

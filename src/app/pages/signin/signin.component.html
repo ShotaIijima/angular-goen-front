@@ -1,0 +1,79 @@
+<alert *ngIf="isAlreadyUsed" type="danger" isCloseAlert="true">このアカウント名は既に使われています。</alert>
+<alert *ngIf="serverErr" type="danger" isCloseAlert="true">申し訳ございません。ただいまメンテナンス中につきご利用いただけません。</alert>
+<div class="card card-block login-card">
+  <div><a (click)="kiyakuModal.open()">利用規約</a> および <a (click)="policyModal.open()">プライバシーポリシー</a> にご同意のうえ、<br />登録してください。</div>
+  <h3 class="form-label">GOEN 新規会員登録</h3>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon addon-left" id="username">
+        <i class="fa fa-user fa-fw"></i>
+      </span>
+      <input class="form-control with-primary-addon" placeholder="アカウント名" type="text" [(ngModel)]="account">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon addon-left" id="username">
+        <i class="fa fa-envelope fa-fw"></i>
+      </span>
+      <input class="form-control with-primary-addon" placeholder="メールアドレス" type="text" [(ngModel)]="mail_address">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon addon-left" id="password">
+        <i class="fa fa-lock fa-fw"></i>
+      </span>
+      <input class="form-control with-primary-addon" placeholder="パスワード" type="password" [(ngModel)]="password">
+    </div>
+    <button (click)="signin()" class="btn btn-lg btn-primary">新規会員登録メールを送る</button>
+    <br />
+    <br />
+    <span class="center form-label">または</span>
+    <br />
+    <button (click)="fbSignin()" class="btn btn-info">
+        <i class="fa fa-facebook-square fa-fw"></i>
+      Facebook ログイン
+    </button>
+  </div>
+</div>
+
+<modal #kiyakuModal modalClass="modal-lg">
+    <modal-header>
+    <h3>利用規約（利用企業用）</h3>
+    </modal-header>
+    <modal-content>
+      <h4>第1条 本規約について</h4>
+      <p> この利用規約（以下「本規約」といいます。）は、キャリン株式会社（以下「当社」といいます。）
+        が運営するタレントプール採用プラットフォーム「CaLin」の製品およびサービス（以下「本サービス」といいます。）
+        を利用する企業・団体（以下「利用企業」といいます。）と、当社との間における本サービスの利用に関する契約
+        （以下「本契約」といいます。）その他権利義務関係について定めるものです。 </p>
+        <h4>第2条 本規約等への承諾</h4>
+        <p> 本規約は、当社と、利用企業との間の一切の関係に適用するものとします。利用企業は、
+          本規約の他、当社が定める各種の規約（以下「個別規定」といいます。）を承諾し、
+          本サービスを利用するものとします。なお、本規約と個別規定（以下併せて「本規約等」といいます。）
+          の定めが異なる場合には、個別規定の定めが優先するものとします。利用企業は本サービスを利用することにより、
+          本規約等の全ての記載内容に承諾したものとみなされます。 </p>
+    </modal-content>
+    <modal-footer>
+      <button class="btn btn-primary" (click)="kiyakuModal.close()">閉じる</button>
+    </modal-footer>
+</modal>
+
+<modal #policyModal modalClass="modal-lg">
+    <modal-header>
+    <h3>利用規約（利用企業用）</h3>
+    </modal-header>
+    <modal-content>
+      <h4>第1条 本規約について</h4>
+      <p> この利用規約（以下「本規約」といいます。）は、キャリン株式会社（以下「当社」といいます。）
+        が運営するタレントプール採用プラットフォーム「CaLin」の製品およびサービス（以下「本サービス」といいます。）
+        を利用する企業・団体（以下「利用企業」といいます。）と、当社との間における本サービスの利用に関する契約
+        （以下「本契約」といいます。）その他権利義務関係について定めるものです。 </p>
+        <h4>第2条 本規約等への承諾</h4>
+        <p> 本規約は、当社と、利用企業との間の一切の関係に適用するものとします。利用企業は、
+          本規約の他、当社が定める各種の規約（以下「個別規定」といいます。）を承諾し、
+          本サービスを利用するものとします。なお、本規約と個別規定（以下併せて「本規約等」といいます。）
+          の定めが異なる場合には、個別規定の定めが優先するものとします。利用企業は本サービスを利用することにより、
+          本規約等の全ての記載内容に承諾したものとみなされます。 </p>
+    </modal-content>
+    <modal-footer>
+      <button class="btn btn-primary" (click)="policyModal.close()">閉じる</button>
+    </modal-footer>
+</modal>
