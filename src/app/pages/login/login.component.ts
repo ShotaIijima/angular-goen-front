@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 import { conf } from '../../conf';
-import { MasterService } from 'src/app/shared/services/master.service';
+import { MasterService } from '../../shared/services/master.service';
 
 @Component({
   selector: 'app-login',
