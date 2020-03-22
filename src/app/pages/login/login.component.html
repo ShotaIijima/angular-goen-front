@@ -20,7 +20,7 @@
     <br />
     <span class="center form-label">または</span>
     <br />
-    <button (click)="fbLogin()" class="btn btn-info">
+    <button [disabled]="masterFetched" (click)="fbLogin()" class="btn btn-info">
         <i class="fa fa-facebook-square fa-fw"></i>
       Facebook ログイン
     </button>

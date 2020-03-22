@@ -22,12 +22,12 @@
       </span>
       <input class="form-control with-primary-addon" placeholder="パスワード" type="password" [(ngModel)]="password">
     </div>
-    <button (click)="signin()" class="btn btn-lg btn-primary">新規会員登録メールを送る</button>
+    <button [disabled]="masterFetched" (click)="signin()" class="btn btn-lg btn-primary">新規会員登録メールを送る</button>
     <br />
     <br />
     <span class="center form-label">または</span>
     <br />
-    <button (click)="fbSignin()" class="btn btn-info">
+    <button [disabled]="masterFetched" (click)="fbSignin()" class="btn btn-info">
         <i class="fa fa-facebook-square fa-fw"></i>
       Facebook ログイン
     </button>

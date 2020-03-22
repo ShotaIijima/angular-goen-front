@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 import { conf } from '../../conf';
+import { MasterService } from 'src/app/shared/services/master.service';
 
 @Component({
   selector: 'app-login',
@@ -15,14 +16,21 @@ export class LoginComponent implements OnInit {
   masterFetched: boolean = false;
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private master: MasterService
     ) { }
 
   ngOnInit() {
     localStorage.removeItem(conf.SKEY_ISFBLOGIN);
+    this.master.fetchMaster()
+    .then((res) => {
+      this.masterFetched = res;
+    })
   }
 
   login() {
+    if(!this.masterFetched)
+      return;
     this.disableNotifications();
     this.auth.login(this.mail_address, this.password)
     .catch(err => {

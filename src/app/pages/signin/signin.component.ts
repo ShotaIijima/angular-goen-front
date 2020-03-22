@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { sleep } from '../../shared/utils/sleep';
 import { conf } from '../../conf';
 import { AuthService } from '../../shared/services/auth.service';
+import { MasterService } from 'src/app/shared/services/master.service';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +15,19 @@ export class SigninComponent implements OnInit {
   account: string;
   isAlreadyUsed: boolean = false;
   serverErr: boolean = false;
+  masterFetched: boolean = false;
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private master: MasterService
   ) { }
 
   ngOnInit() {
     localStorage.removeItem(conf.SKEY_ISFBLOGIN);
+    this.master.fetchMaster()
+    .then((res) => {
+      this.masterFetched = res;
+    })
   }
 
   signin() {
