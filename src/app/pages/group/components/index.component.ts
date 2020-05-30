@@ -30,6 +30,10 @@ export class GroupIndexComponent implements OnInit {
 
   ngOnInit() {
     this.rels = this._rel.getRelations();
+    if(this.rels == null) {
+      this._rel.fetchRelations();
+      this.rels = this._rel.getRelations();
+    }
     this.isMng = this._user.isMng();
     console.log(this.rels)
   }
@@ -61,17 +65,6 @@ export class GroupIndexComponent implements OnInit {
 
   updateMemoGrade(user_id) {
     this._rel.updateRelations(user_id)
-    .then((res) => {
-      if(res) {
-        this.updateSuccessMsg = msgs.ERR_MSG_GROUP_UPDATE_SUC
-      } else {
-        this.updateErrMsg = msgs.ERR_MSG_GROUP_UPDATE_ERR
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-      this.updateErrMsg = msgs.ERR_MSG_GROUP_UPDATE_ERR;
-    })
   }
 
   goodbye(user_id) {

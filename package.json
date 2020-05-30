@@ -14,11 +14,11 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/build-angular": "^0.13.4",
     "@angular/animations": "^7.2.16",
     "@angular/common": "^7.2.16",
     "@angular/compiler": "^7.2.16",
     "@angular/core": "^7.2.16",
+    "@angular/fire": "^5.1.2",
     "@angular/forms": "^7.2.16",
     "@angular/http": "^7.2.16",
     "@angular/platform-browser": "^7.2.16",
@@ -30,6 +30,7 @@
     "core-js": "^2.6.11",
     "echarts": "^3.8.5",
     "express-session": "^1.17.0",
+    "firebase": "^6.3.1",
     "font-awesome": "^4.7.0",
     "fontface-source-sans-pro": "^2.0.10-alpha1",
     "jquery": "^3.2.1",
@@ -40,7 +41,7 @@
     "ngx-echarts": "^2.0.0",
     "ngx-modal": "^0.0.29",
     "ngx-pagination": "^3.0.3",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "normalize.css": "^7.0.0",
     "pell": "^1.0.4",
     "roboto-fontface": "^0.8.0",
@@ -51,6 +52,7 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.12.3",
     "@angular/cli": "^7.3.6",
     "@angular/compiler-cli": "^7.2.16",
     "@angular/language-service": "^7.2.16",

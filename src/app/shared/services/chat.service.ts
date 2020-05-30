@@ -22,6 +22,10 @@ export class ChatService {
         this.coms = this.comCollection.snapshotChanges()
     }
 
+    public setCollection(com_url) {
+        this.comCollection = db.collection<_Comment>(com_url)
+    }
+
     public getComs() {
         return this.coms
     }

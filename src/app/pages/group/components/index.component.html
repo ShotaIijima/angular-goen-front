@@ -18,8 +18,10 @@
       <div class="col-md-4 form-group">
         <label class="control-label">マッチング状態</label>
         <select name="select" class="form-control" [(ngModel)]="searchStatus">
+          <option value=""></option>
+          <option value="-1">興味なし</option>
+          <option value="0">マッチング候補</option>
           <option value="1">マッチング済み</option>
-          <option value="2">マッチング候補</option>
         </select>
       </div>
       <div class="col-md-4 form-group">
@@ -62,7 +64,7 @@
         <div class="profile-foot">
           <div class="skills-wrap">
             <a (click)="goProfilePage(user.id)" class="link-tag"><i class="fa fa-user fa-fw"></i>プロフィール</a>
-            <a (click)="showMessage(user.id)" class="link-tag"><i class="fa fa-comments fa-fw"></i>メッセージ</a>
+            <a (click)="showMessage(user.id)" *ngIf="user.com_url != null && user.com_url != ''" class="link-tag"><i class="fa fa-comments fa-fw"></i>メッセージ</a>
           </div>
           <br />
           <input class="checkbox checkbox-primary" type="checkbox" id="{{user.id}}"
@@ -79,8 +81,8 @@
             <h4>Memo</h4>
             <textarea class="form-control" [(ngModel)]="user.memo"></textarea>
             <button (click)="updateMemoGrade(user.id)" class="btn btn-primary update-button">更新</button>
-            <alert *ngIf="updateErrMsg != null" type="danger" isCloseAlert="true">{{updateErrMsg}}</alert>
-            <alert *ngIf="updateSuccessMsg != null" type="success" isCloseAlert="true">{{updateSuccessMsg}}</alert>
+            <alert *ngIf="user.updateErrMsg != null" type="danger" isCloseAlert="true">{{user.updateErrMsg}}</alert>
+            <alert *ngIf="user.updateSuccessMsg != null" type="success" isCloseAlert="true">{{user.updateSuccessMsg}}</alert>
           </div>
           <h4>SNS</h4>
           <ul class="contact-way-item">
@@ -116,8 +118,8 @@
           <div *ngIf="user.rel_type !== 0">
               <button (click)="unmatching(user.id)" class="btn btn-success matching-btn">マッチング候補に戻す</button>
           </div>
-          <alert *ngIf="matchingErrMsg != null" type="danger" isCloseAlert="true">{{matchingErrMsg}}</alert>
-          <alert *ngIf="matchingSuccessMsg != null" type="success" isCloseAlert="true">{{matchingSuccessMsg}}</alert>
+          <alert *ngIf="user.matchingErrMsg != null" type="danger" isCloseAlert="true">{{user.matchingErrMsg}}</alert>
+          <alert *ngIf="user.matchingSuccessMsg != null" type="success" isCloseAlert="true">{{user.matchingSuccessMsg}}</alert>
         </div>
       </div>
     </div>
