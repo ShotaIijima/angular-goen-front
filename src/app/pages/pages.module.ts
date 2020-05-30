@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
-import { ModalsComponent } from './ui/components/modals/modals.component';
+//import { ModalsComponent } from './ui/components/modals/modals.component';
 
 @NgModule({
     imports: [
@@ -26,7 +26,6 @@ import { ModalsComponent } from './ui/components/modals/modals.component';
         PagesComponent,
         LoginComponent,
         SigninComponent,
-        ModalsComponent
     ]
 })
 export class PagesModule { }

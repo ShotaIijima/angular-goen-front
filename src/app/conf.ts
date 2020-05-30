@@ -1,9 +1,14 @@
-export module conf{
-    export const SKEY_USER = "hF3rmio$AbeOn9ApH3mRlQ";
-    export const SKEY_REDIRECT_TO = "jlkgsjgraergaelktrgra";
-    export const SKEY_ISFBLOGIN = "klmshbpsfmps@;";
-    export const SKEY_ISFBSIGNIN = "kp;hksrpotkohp";
-    export const SKEY_FBUSERSETTED = "hytjytetyjuejbsru";
-    export const SKEY_RELOAD_DONE = "tjhyrjwre";
-    export const SKEY_MASTER = "lm@lm@tujesyh";
+export const conf = {
+    "SERVER_URL": "http://192.168.100.111:3000",
+    "SKEY_USER": "hF3rmio$AbeOn9ApH3mRlQ",
+    "SKEY_TD": "hpmptkwqprmql",
+    "SKEY_REDIRECT_TO": "jlkgsjgraergaelktrgra",
+    "SKEY_REDIR_BY_SERVER_ERR": "tltrgwetraaghgra",
+    "SKEY_ISFBLOGIN": "klmshbpsfmps@;",
+    "SKEY_ISFBSIGNIN": "kp;hksrpotkohp",
+    "SKEY_FBUSERSETTED": "hytjytetyjuejbsru",
+    "SKEY_RELOAD_DONE": "tjhyrjwre",
+    "SKEY_MASTER": "lm@lm@tujesyh",
+    "SKEY_IS_MNG": "bopgkpgspp:sg",
+    "SKEY_RELS": "shbghghukh",
 }

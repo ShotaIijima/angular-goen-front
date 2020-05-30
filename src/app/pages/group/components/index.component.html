@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="search-diag-flg">
+    <input class="checkbox checkbox-primary" type="checkbox" id="search-diag-flg"
+    (change)="onChangeSearchDiagFlg($event.target.checked)">
+    <label class="check-label" for="search-diag-flg">検索方法を指定する</label>
+  </div>
+  <div *ngIf="showSearchDiagFlg" class="card search-diag">
+      <div class="col-md-4 form-group">
+        <label class="control-label">Rank</label>
+        <select name="select" class="form-control" [(ngModel)]="searchRank">
+          <option value=""></option>
+          <option value="1">A</option>
+          <option value="2">B</option>
+          <option value="3">C</option>
+          <option value="4">D</option>
+        </select>
+      </div>
+      <div class="col-md-4 form-group">
+        <label class="control-label">マッチング状態</label>
+        <select name="select" class="form-control" [(ngModel)]="searchStatus">
+          <option value="1">マッチング済み</option>
+          <option value="2">マッチング候補</option>
+        </select>
+      </div>
+      <div class="col-md-4 form-group">
+        <label class="control-label">任意検索</label>
+        <input type="text" class="form-control" [(ngModel)]="searchAny">
+      </div>
+    <button (click)="searchUser()" class="btn btn-primary search-button">検索</button>
+  </div>
+  <div *ngFor="let user of rels">
+  <div class="col-md-4 animated fadeIn" *ngIf="user.searched">
+    <div class="card">
+      <span class="badge success lank-badge" *ngIf="user.rel_type === 0; else lankBadge_1;">マッチング候補</span>
+      <ng-template #lankBadge_1>
+          <span class="badge primary lank-badge" *ngIf="user.rel_type === 1; else lankBadge_minus1;">マッチング済み</span>
+      </ng-template>
+      <ng-template #lankBadge_minus1>
+          <span class="badge danger lank-badge">興味なし</span>
+      </ng-template>
+      <div class="profile-wrap animated fadeIn">
+        <div class="info-wrap" (click)="goProfilePage(user.id)">
+            <div class="avatar-wrap" *ngIf="user.photo_path != null; else uploadPhoto">
+              <img src="{{user.photo_path}}">
+            </div>
+            <ng-template #uploadPhoto>
+                <div class="avatar-wrap">
+                  <i class="fa fa-user icon"></i>
+                </div>
+            </ng-template>
+          <span class="user-name">{{user.name}}</span>
+        </div>
+        <div class="profile-head" *ngIf="user.photo_path != null; else uploadPhotoBg">
+          <img src="{{user.photo_path}}" alt="profile-head-bg" class="profile-head-bg">
+        </div>
+        <ng-template #uploadPhotoBg>
+            <div class="profile-head-up">
+                <div class="profile-head-bg-up">
+                </div>
+            </div>
+        </ng-template>
+        <div class="profile-foot">
+          <div class="skills-wrap">
+            <a (click)="goProfilePage(user.id)" class="link-tag"><i class="fa fa-user fa-fw"></i>プロフィール</a>
+            <a (click)="showMessage(user.id)" class="link-tag"><i class="fa fa-comments fa-fw"></i>メッセージ</a>
+          </div>
+          <br />
+          <input class="checkbox checkbox-primary" type="checkbox" id="{{user.id}}"
+          (change)="onChange(user.id, $event.target.checked)">
+          <label class="check-label" for="{{user.id}}">全て表示する</label>
+          <div *ngIf="user.visible === 1">
+            <h4>Rank</h4>
+            <select name="select" class="form-control" [(ngModel)]="user.grade">
+              <option value="1">A</option>
+              <option value="2">B</option>
+              <option value="3">C</option>
+              <option value="4">D</option>
+            </select>
+            <h4>Memo</h4>
+            <textarea class="form-control" [(ngModel)]="user.memo"></textarea>
+            <button (click)="updateMemoGrade(user.id)" class="btn btn-primary update-button">更新</button>
+            <alert *ngIf="updateErrMsg != null" type="danger" isCloseAlert="true">{{updateErrMsg}}</alert>
+            <alert *ngIf="updateSuccessMsg != null" type="success" isCloseAlert="true">{{updateSuccessMsg}}</alert>
+          </div>
+          <h4>SNS</h4>
+          <ul class="contact-way-item">
+            <li class="contact-way-list">
+              <a *ngIf="user.facebook != null && user.facebook !== ''; else noFb" href="{{user.facebook}}" target="_blank" class="info-icon fa fa-facebook"></a>
+              <ng-template #noFb>
+                <div class="info-icon fa fa-facebook"></div>
+              </ng-template>
+            </li>
+            <li class="contact-way-list">
+              <a *ngIf="user.github != null && user.github !== ''; else noGh" href="{{user.github}}" target="_blank" class="info-icon fa fa-github"></a>
+              <ng-template #noGh>
+                <div class="info-icon fa fa-github"></div>
+              </ng-template>
+            </li>
+            <li class="contact-way-list">
+              <a *ngIf="user.slack != null && user.slack !== ''; else noSl" href="{{user.slack}}" target="_blank" class="info-icon fa fa-slack"></a>
+              <ng-template #noSl>
+                <div class="info-icon fa fa-slack"></div>
+              </ng-template>
+            </li>
+            <li class="contact-way-list">
+              <a *ngIf="user.skype != null && user.skype !== ''; else noSk" href="{{user.skype}}" target="_blank" class="info-icon fa fa-skype"></a>
+              <ng-template #noSk>
+                <div class="info-icon fa fa-skype"></div>
+              </ng-template>
+            </li>
+          </ul>
+          <div *ngIf="user.rel_type === 0">
+            <button (click)="matching(user.id)" class="btn btn-primary matching-btn"><i class="fa fa-handshake-o"></i>マッチング</button>
+            <button (click)="goodbye(user.id)" class="btn btn-primary not-interest"><i class="fa fa-ban fa-fw"></i>興味なし</button>
+          </div>
+          <div *ngIf="user.rel_type !== 0">
+              <button (click)="unmatching(user.id)" class="btn btn-success matching-btn">マッチング候補に戻す</button>
+          </div>
+          <alert *ngIf="matchingErrMsg != null" type="danger" isCloseAlert="true">{{matchingErrMsg}}</alert>
+          <alert *ngIf="matchingSuccessMsg != null" type="success" isCloseAlert="true">{{matchingSuccessMsg}}</alert>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

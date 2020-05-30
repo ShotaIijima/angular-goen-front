@@ -17,7 +17,6 @@ import { AlertComponent } from './components/alert/alert.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ModalModule } from 'ngx-modal';
-import { ModalsComponent } from '../pages/ui/components/modals/modals.component';
 
 @NgModule({
   imports: [

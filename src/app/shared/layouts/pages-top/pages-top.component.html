@@ -1,8 +1,13 @@
 <div class="pages-top">
   <div class="avatar-wrap">
-    <div class="avatar">
+    <div class="avatar" *ngIf="user.photo_path != null; else uploadPhoto">
       <img src="{{user.photo_path}}">
     </div>
+    <ng-template #uploadPhoto>
+        <div class="avatar-up">
+          <i class="fa fa-user icon"></i>
+        </div>
+    </ng-template>
     <div class="user-info-wrap">
       <span class="user-name" title="{{user.name}}">{{user.name}}</span>
       <span class="user-post" title="{{user.position}}">{{user.position}}</span>
@@ -15,12 +20,8 @@
   </div>
 
   <div class="msg-tips-wrap">
-    <div class="msg-entrance ring">
-      <span class="fa fa-bell fa-fw"></span>
-      <span class="badge" *ngIf="tip.ring"></span>
-    </div>
-    <div class="msg-entrance email">
-      <span class="fa fa-envelope fa-fw"></span>
+    <div (click)="goHomePage()" class="msg-entrance email">
+      <span class="fa fa-home"></span>
       <span class="badge" *ngIf="tip.email"></span>
     </div>
     <div (click)="_logout()" class="msg-entrance">

@@ -1,12 +1,18 @@
 @import '../../shared/theme/conf';
 .login-card {
-    padding: 20px;
+    padding: 10px;
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    @include mq(md) {
+        width: 500px;
+        @include mq(sm) {
+            width: 200px;
+        }
+    }
     height: auto;
+    z-index: -1000000;
     .form-group {
         padding: 0;
     }
@@ -20,7 +26,7 @@
     }
     .input-group {
         padding: 0;
-        margin: 25px 0;
+        margin: 10px 0;
     }
     .form-control {
         background: transparent;

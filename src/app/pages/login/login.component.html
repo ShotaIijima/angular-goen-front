@@ -1,5 +1,5 @@
-<alert *ngIf="cannotLogin" type="danger" isCloseAlert="true">アカウント名またはパスワードが誤っています。</alert>
-<alert *ngIf="serverErr" type="danger" isCloseAlert="true">申し訳ございません。ただいまメンテナンス中につきご利用いただけません。</alert>
+<alert *ngIf="serverErrMsg != null" type="danger" isCloseAlert="true">{{serverErrMsg}}</alert>
+<alert *ngIf="errRedirectMsg != null" type="danger" isCloseAlert="true">{{errRedirectMsg}}</alert>
 <div class="card card-block login-card">
   <h3 class="form-label">GOEN ログイン</h3>
   <div class="form-group">
@@ -7,23 +7,24 @@
       <span class="input-group-addon addon-left" id="username">
         <i class="fa fa-user fa-fw"></i>
       </span>
-      <input class="form-control with-primary-addon" placeholder="アカウント名" type="text" [(ngModel)]="mail_address" />
+      <input class="form-control with-primary-addon" placeholder="アカウント名" type="text" (keyup.enter)="login()" [(ngModel)]="mail_address" />
     </div>
     <div class="input-group">
       <span class="input-group-addon addon-left" id="password">
         <i class="fa fa-lock fa-fw"></i>
       </span>
-      <input class="form-control with-primary-addon" placeholder="パスワード" type="password" [(ngModel)]="password" />
+      <input class="form-control with-primary-addon" placeholder="パスワード" type="password" (keyup.enter)="login()" [(ngModel)]="password" />
     </div>
-    <button [disabled]="masterFetched" (click)="login()" class="btn btn-lg btn-primary">ログイン</button>
+    <button [disabled]="!masterFetched" (click)="login()" class="btn btn-lg btn-primary">ログイン</button>
     <br />
     <br />
     <span class="center form-label">または</span>
     <br />
-    <button [disabled]="masterFetched" (click)="fbLogin()" class="btn btn-info">
+    <button [disabled]="!masterFetched" (click)="fbLogin()" class="btn btn-info">
         <i class="fa fa-facebook-square fa-fw"></i>
       Facebook ログイン
     </button>
-    <a href="/signin" class="btn btn-link">新規会員登録</a>
+    <a [href]="signin_url" class="btn btn-link">新規会員登録</a>
   </div>
 </div>
+<loading [loading]="spinner.getLoading()"></loading>

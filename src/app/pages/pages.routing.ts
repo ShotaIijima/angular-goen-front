@@ -10,7 +10,15 @@ export const childRoutes: Routes = [
         component: LoginComponent,
     },
     {
+        path: 'mng/login',
+        component: LoginComponent,
+    },
+    {
         path: 'signin',
+        component: SigninComponent,
+    },
+    {
+        path: 'mng/signin',
         component: SigninComponent,
     },
     {
@@ -23,6 +31,8 @@ export const childRoutes: Routes = [
             { path: 'editor', loadChildren: './editor/editor.module#EditorModule' },
             { path: 'icon', loadChildren: './icon/icon.module#IconModule' },
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
+            { path: 'group', loadChildren: './group/group.module#GroupModule' },
+            { path: 'message', loadChildren: './message/message.module#MessageModule' },
             { path: 'form', loadChildren: './form/form.module#FormModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
             { path: 'ui', loadChildren: './ui/ui.module#UIModule' },

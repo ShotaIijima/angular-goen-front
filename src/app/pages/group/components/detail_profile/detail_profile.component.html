@@ -1,0 +1,186 @@
+<div class="card">
+  <div class="profile-wrap animated fadeIn">
+    <div class="info-wrap">
+        <div class="avatar-wrap" *ngIf="user.photo_path != null; else uploadPhoto">
+          <img src="{{user.photo_path}}">
+          <input id="upfile" name="upfile" type="file" accept="uploads/*" (change)="uploadProfilePhoto($event)">
+        </div>
+        <ng-template #uploadPhoto>
+            <div class="avatar-wrap">
+              <i class="fa fa-user icon"></i>
+              <input id="upfile" name="upfile" type="file" accept="uploads/*" (change)="uploadProfilePhoto($event)">
+            </div>
+        </ng-template>
+      <span class="user-name">{{user.name}}</span>
+    </div>
+    <div class="profile-head" *ngIf="user.photo_path != null; else uploadPhotoBg">
+      <img src="{{user.photo_path}}" alt="profile-head-bg" class="profile-head-bg">
+    </div>
+    <ng-template #uploadPhotoBg>
+        <div class="profile-head-up">
+            <div class="profile-head-bg-up">
+            </div>
+        </div>
+    </ng-template>
+    <alert *ngIf="updatedPhotoPathSuccess" type="success" isCloseAlert="true">プロフィール画像のアップデートが完了しました。</alert>
+    <alert *ngIf="updatedPhotoPathError" type="danger" isCloseAlert="true">プロフィール画像のアップデートに失敗しました。お問い合わせください。</alert>
+    <div class="profile-foot">
+        <div class="col-md-12 form-group">
+          <h4>プロフィール</h4>
+        </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">ユーザ名</label>
+          <input type="text" class="form-control" placeholder="ユーザ名" [(ngModel)]="user.name">
+        </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">メールアドレス</label>
+          <input type="text" class="form-control" placeholder="メールアドレス" [(ngModel)]="user.mail_address">
+        </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">性別</label>
+          <select name="select" class="form-control" [(ngModel)]="user.sex">
+            <option value="1">男性</option>
+            <option value="2">女性</option>
+          </select>
+        </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">血液型</label>
+          <select name="select" class="form-control" [(ngModel)]="user.bloodtype">
+            <option value="1">O型</option>
+            <option value="2">A型</option>
+            <option value="3">B型</option>
+            <option value="4">AB型</option>
+          </select>
+        </div>
+        <div class="col-md-2 form-group">
+            <label class="control-label">生年月日(年)</label>
+            <select name="select" class="form-control" [(ngModel)]="birthY" (change)="onChangeBirthY($event.target.value)">
+              <option *ngFor='let year of years' value="{{year}}">{{year}}</option>
+            </select>
+        </div>
+        <div class="col-md-2 form-group">
+            <label class="control-label">生年月日(月)</label>
+            <select name="select" class="form-control" [(ngModel)]="birthM" (change)="onChangeBirthM($event.target.value)">
+              <option *ngFor='let month of months' value="{{month}}">{{month}}</option>
+            </select>
+        </div>
+        <div class="col-md-2 form-group">
+            <label class="control-label">生年月日(日)</label>
+            <select name="select" class="form-control" [(ngModel)]="birthD" (change)="onChangeBirthD($event.target.value)">
+              <option *ngFor='let day of days' value="{{day}}">{{day}}</option>
+            </select>
+        </div>
+        <!--<div class="col-md-4 form-group">
+          <label class="control-label">利用目的</label>
+          <select name="select" class="form-control" [(ngModel)]="user.reason">
+            <option *ngFor='let reason of master.reasons' value="{{reason.id}}">{{reason.name}}</option>
+          </select>
+        </div>-->
+        <div class="col-md-4 form-group">
+          <label class="control-label">{{mng_pref}}希望職種</label>
+          <select name="select" class="form-control" [(ngModel)]="user.type" (change)="onChangeType($event.target.value)">
+            <option *ngFor='let type of master.types' value="{{type.id}}">{{type.name}}</option>
+          </select>
+        </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">{{kibousha}}</label>
+          <select name="select" class="form-control" [(ngModel)]="user.japanese_proficiency">
+            <option value="1">N2</option>
+            <option value="2">N3</option>
+            <option value="3">N4</option>
+            <option value="4">N5</option>
+          </select>
+        </div>
+        <br />
+        <div *ngIf="!user.isMng" class="col-md-4 form-group">
+          <label class="control-label">住所</label>
+          <select name="select" class="form-control" [(ngModel)]="user.address">
+            <option *ngFor='let area of master.areas' value="{{area.id}}">{{area.name}}</option>
+          </select>
+        </div>
+        <div *ngIf="!user.isMng" class="col-md-12 form-group">
+          <label class="control-label">住所 詳細</label>
+          <input type="text" class="form-control" placeholder="現在の住所 詳細" [(ngModel)]="user.address_detail">
+        </div>
+        <div class="col-md-4 form-group">
+          <label class="control-label">勤務希望地</label>
+          <select name="select" class="form-control" [(ngModel)]="user.area">
+            <option *ngFor='let area of master.areas' value="{{area.id}}">{{area.name}}</option>
+          </select>
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">勤務希望地 詳細</label>
+          <input type="text" class="form-control" placeholder="勤務希望地 詳細" [(ngModel)]="user.wp_detail">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">自己紹介</label>
+          <textarea class="form-control" [(ngModel)]="user.self_introduction"></textarea>
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">{{mng_pref}}アピール</label>
+          <textarea class="form-control" [(ngModel)]="user.apeal"></textarea>
+        </div>
+        <div class="col-md-12 form-group">
+          <h4>{{mng_pref}}希望職種 詳細</h4>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3" *ngFor="let td of tds">
+            <input class="checkbox checkbox-primary"
+            type="checkbox"
+            id="{{td.id}}"
+            (change)="onChange(td.id, $event.target.checked)"
+            [checked]="user.tdusers.indexOf(td.id) !== -1">
+            <label class="check-label" for="{{td.id}}">{{td.name}}</label>
+          </div>
+        </div>
+        <div class="col-md-12 form-group">
+          <h4>SNS</h4>
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">Facebook</label>
+          <input type="text" class="form-control" [(ngModel)]="user.facebook" placeholder="Facebookの個人アカウントページのリンクを記入してください">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">GitHub</label>
+          <input type="text" class="form-control" [(ngModel)]="user.github" placeholder="GitHubの個人アカウントページのリンクを記入してください">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">Slack</label>
+          <input type="text" class="form-control" [(ngModel)]="user.slack" placeholder="Slackの個人アカウントページのリンクを記入してください">
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label">Skype</label>
+          <input type="text" class="form-control" [(ngModel)]="user.skype" placeholder="Skypeの個人アカウントページのリンクを記入してください">
+        </div>
+        <ul class="contact-way-item">
+          <li class="contact-way-list">
+            <a *ngIf="user.facebook != null && user.facebook !== ''; else noFb" href="{{user.facebook}}" target="_blank" class="info-icon fa fa-facebook"></a>
+            <ng-template #noFb>
+              <div class="info-icon fa fa-facebook"></div>
+            </ng-template>
+          </li>
+          <li class="contact-way-list">
+            <a *ngIf="user.github != null && user.github !== ''; else noGh" href="{{user.github}}" target="_blank" class="info-icon fa fa-github"></a>
+            <ng-template #noGh>
+              <div class="info-icon fa fa-github"></div>
+            </ng-template>
+          </li>
+          <li class="contact-way-list">
+            <a *ngIf="user.slack != null && user.slack !== ''; else noSl" href="{{user.slack}}" target="_blank" class="info-icon fa fa-slack"></a>
+            <ng-template #noSl>
+              <div class="info-icon fa fa-slack"></div>
+            </ng-template>
+          </li>
+          <li class="contact-way-list">
+            <a *ngIf="user.skype != null && user.skype !== ''; else noSk" href="{{user.skype}}" target="_blank" class="info-icon fa fa-skype"></a>
+            <ng-template #noSk>
+              <div class="info-icon fa fa-skype"></div>
+            </ng-template>
+          </li>
+        </ul>
+        <button (click)="updateUser()" class="btn btn-primary update-button">更新</button>
+        <alert *ngIf="updateCompleted" type="success" isCloseAlert="true">プロフィールの更新が完了しました。</alert>
+        <alert *ngIf="updateFailed" type="danger" isCloseAlert="true">申し訳ございません。ただいまメンテナンス中につきご利用いただけません。</alert>
+    </div>
+  </div>
+</div>

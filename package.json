@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
+    "start": "ng serve --host 192.168.100.111",
     "build": "ng build --base-href ./",
     "build:prod": "ng build --prod --base-href ./",
     "build:ci": "ng build --prod --base-href ./",

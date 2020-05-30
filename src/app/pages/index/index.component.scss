@@ -1,15 +1,22 @@
 @import "../../shared/theme/conf";
+
+.root {
+    width: 100%;
+}
+
 .tip-card {
     padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    .card-msg {
+        font-size: large;
+        @include mq(sm) {
+            font-size: small;
+        }
+    }
     .tip-msg {
         flex: 1;
-        h3 {
-            line-height: 0;
-            margin-bottom: 20px;
-        }
         span {
             color: rgba($fonts-color, .6);
             font-size: $default-text;

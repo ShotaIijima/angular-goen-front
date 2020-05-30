@@ -10,7 +10,6 @@ import {GlobalService} from '../../services/global.service';
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
 
-
   public menuInfo: Array<any> = [];
   public sidebarToggle = true;
 
@@ -21,7 +20,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.menuInfo = this._menuService.putSidebarJson();
     this._sidebarToggle();
-    this._menuService.selectItem(this.menuInfo); /* ----->初始化判断路由isActive状态  未完成  待优化 */
+    this._menuService.selectItem(this.menuInfo);
     this._isSelectItem(this.menuInfo);
   }
 
@@ -42,7 +41,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   }
 
-  /* 初始化 判断当前路由状态信息 首次加载菜单状态 */
   _isSelectItem(item) {
     for (const i in item) {
       if (item[i].children) {
@@ -58,8 +56,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-  // detect window size and automatically hide the left side menu
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.sidebarToggle = window.innerWidth >= 970;

@@ -1,5 +1,4 @@
-<alert *ngIf="isAlreadyUsed" type="danger" isCloseAlert="true">このアカウント名は既に使われています。</alert>
-<alert *ngIf="serverErr" type="danger" isCloseAlert="true">申し訳ございません。ただいまメンテナンス中につきご利用いただけません。</alert>
+<alert *ngIf="serverErrMsg != null" type="danger" isCloseAlert="true">{{ serverErrMsg }}</alert>
 <div class="card card-block login-card">
   <div><a (click)="kiyakuModal.open()">利用規約</a> および <a (click)="policyModal.open()">プライバシーポリシー</a> にご同意のうえ、<br />登録してください。</div>
   <h3 class="form-label">GOEN 新規会員登録</h3>
@@ -22,17 +21,19 @@
       </span>
       <input class="form-control with-primary-addon" placeholder="パスワード" type="password" [(ngModel)]="password">
     </div>
-    <button [disabled]="masterFetched" (click)="signin()" class="btn btn-lg btn-primary">新規会員登録メールを送る</button>
+    <button [disabled]="!masterFetched" (click)="signin()" class="btn btn-lg btn-primary">新規会員登録</button>
     <br />
     <br />
     <span class="center form-label">または</span>
     <br />
-    <button [disabled]="masterFetched" (click)="fbSignin()" class="btn btn-info">
+    <button [disabled]="!masterFetched" (click)="fbSignin()" class="btn btn-info">
         <i class="fa fa-facebook-square fa-fw"></i>
       Facebook ログイン
     </button>
   </div>
 </div>
+
+<loading [loading]="spinner.getLoading()"></loading>
 
 <modal #kiyakuModal modalClass="modal-lg">
     <modal-header>

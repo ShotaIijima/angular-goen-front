@@ -1,8 +1,9 @@
 <div class="pages-wrap">
   <pages-top></pages-top>
   <div class="pages-body">
-    <sidebar></sidebar>
-    
+    <div class="sidebar">
+      <sidebar></sidebar>
+    </div>
     <div class="pages-content">
       <content-top></content-top>
       <router-outlet></router-outlet>
@@ -10,4 +11,4 @@
     </div>
   </div>
 </div>
-<loading [loading]="false"></loading>
+<loading [loading]="spinner.getLoading()"></loading>

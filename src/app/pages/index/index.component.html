@@ -1,11 +1,13 @@
-<div class="row">
+<div class="row root">
   <div class="col-md-12 animated fadeIn">
     <div class="card card-block tip-card">
       <div class="tip-msg">
-        <h3>マッチング済みユーザ{{ username }}</h3>
-        <span>118 / 251</span>
+        <div class="card-msg">マッチングユーザ</div>
+        <span>マッチング済み: 0名</span>
+        <br />
+        <span>マッチング候補: 0名</span>
       </div>
-      <button (click)="showMatchedUser" class="tip-ico tip-ico-primary">
+      <button (click)="showMatchedUser()" class="tip-ico tip-ico-primary">
         <i class="fa fa-group fa-fw"></i>
       </button>
     </div>
@@ -13,10 +15,10 @@
   <div class="col-md-12 animated fadeIn">
     <div class="card card-block tip-card">
       <div class="tip-msg">
-        <h3>メッセージ</h3>
-        <span>2メッセージ</span>
+        <div class="card-msg">新着メッセージ</div>
+        <span>0メッセージ</span>
       </div>
-      <button class="tip-ico tip-ico-info">
+      <button (click)="showMessages()" class="tip-ico tip-ico-info">
         <i class="fa fa-comments fa-fw"></i>
       </button>
     </div>

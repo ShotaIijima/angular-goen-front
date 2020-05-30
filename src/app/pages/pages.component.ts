@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SpinnerService } from '../shared/services/spinner.service';
 
 @Component({
   selector: 'app-pages',
@@ -6,4 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./pages.component.scss']
 })
 
-export class PagesComponent { }
+export class PagesComponent { 
+
+  constructor(
+    public spinner: SpinnerService
+  ){}
+}

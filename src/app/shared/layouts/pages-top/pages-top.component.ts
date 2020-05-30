@@ -3,6 +3,7 @@ import {GlobalService} from '../../services/global.service';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/User';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pages-top',
@@ -14,12 +15,13 @@ export class PagesTopComponent implements AfterViewInit {
   user: User;
 
   sidebarToggle: boolean = true;
-  tip = {ring: true, email: true};
+  tip = {email: true};
 
   constructor(
-    private auth: AuthService,
+    private _auth: AuthService,
     private _user: UserService,
-    private _globalService: GlobalService) {
+    private _globalService: GlobalService,
+    private _router: Router) {
   }
 
   ngOnInit() { 
@@ -39,10 +41,15 @@ export class PagesTopComponent implements AfterViewInit {
   }
 
   public _logout() {
-    this.auth.logout();
+    this._user.delUser();
+    this._auth.logout();
   }
 
   ngAfterViewInit(): void {
     this.sidebarToggle = window.innerWidth >= 970;
+  }
+
+  goHomePage() {
+    this._router.navigate(['/pages/index']);
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './shared/services/auth.service';
+import { conf } from './conf';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,19 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    //return true;
     if (this.auth.isLoginedByDB()) {
-        return true;
+      return true;
     } else {
         if (this.auth.isLoginedByFB()) {
-            return true;
+          return true;
         } else {
+          if(localStorage.getItem(conf["SKEY_IS_MNG"]) === "0") {
             this.router.navigate(['login']);
-            return false;
+          } else {
+            this.router.navigate(['mng/login']);
+          }
+          return false;
         }
     }
   }

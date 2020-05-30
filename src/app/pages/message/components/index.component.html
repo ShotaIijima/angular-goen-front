@@ -1,0 +1,19 @@
+<div class="row root">
+  <div class="col-md-12 animated fadeIn">
+    <div (click)="goChat(user.id)" class="card card-block tip-card">
+      <div class="tip-ico" *ngIf="user.photo_path != null; else uploadPhoto">
+        <img src="{{user.photo_path}}">
+      </div>
+      <ng-template #uploadPhoto>
+        <button class="tip-ico avatar-up">
+          <i class="fa fa-user icon"></i>
+        </button>
+      </ng-template>
+      <div class="tip-msg">
+        <div class="card-msg">{{user.name}}</div>
+        <span>{{user.name}}さんから0通の新着メッセージ</span>
+      </div>
+      <button class="tip-ico-num">37</button>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,10 @@
 export let MENU_ITEM = [
     {
         path: 'index',
-        title: 'Dashboard',
-        icon: 'dashboard'
+        title: 'Home',
+        icon: 'home'
     },
-    {
+    /*{
         path: 'editor',
         title: 'Pell Editor',
         icon: 'pencil'
@@ -13,12 +13,21 @@ export let MENU_ITEM = [
         path: 'icon',
         title: 'Icon',
         icon: 'diamond'
-    },
-    
+    },*/
     {
         path: 'profile',
-        title: 'User Profile',
+        title: 'Profile',
         icon: 'user'
+    },
+    {
+        path: 'group',
+        title: 'Matching User',
+        icon: 'group'
+    },
+    {
+        path: 'message',
+        title: 'Message',
+        icon: 'comments'
     },
     {
         path: 'ui',
@@ -53,10 +62,10 @@ export let MENU_ITEM = [
                 path: 'progress-bar',
                 title: 'ProgressBar'
             },
-            /*  {
+            {
                  path: 'loading',
                  title: 'Loading'
-             }, */
+             },
         ]
     },
     {
